@@ -29,7 +29,7 @@ jobs:
       - name: set env
         run: |
           echo "ENV=dev" >> $GITHUB_ENV
-          echo "ROLE=arn:aws:iam::${{secrets.ACCOUNT}}:role/suhara_test" >> $GITHUB_ENV
+          echo "ROLE=arn:aws:iam::${{secrets.SUHARA_AMBL_ROLE}}:role/suhara_test" >> $GITHUB_ENV
 
       - name: AWS configure
         uses: aws-actions/configure-aws-credentials@v1
