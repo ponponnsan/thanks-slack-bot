@@ -1,0 +1,38 @@
+name: sam-aws-deploy
+
+on:
+  workflow_dispatch:
+    push:
+      branches:
+        - main
+
+jobs:
+  sam-build:
+    permissions:
+      id-token: write
+      contents: read
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: python setup
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: sam setup
+        uses: aws-actions/setup-sam@v2
+
+      - name: set env
+        run: |
+          echo "ENV=dev" >> $GITHUB_ENV
+          echo "ROLE=arn:aws:iam::${{secrets.ACCOUNT}}:role/suhara_test" >> $GITHUB_ENV
+
+      - name: AWS configure
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{env.ROLE}}
+          aws-region: ap-northeast-1
