@@ -186,7 +186,7 @@ const app = new App({
 });
 
 
-const ChannelId = "C04D3170U0J";
+const ChannelId = "Your slack channnel id";
 
 // ウォレットの作成 
 // チャンネルに入ったらテキストが出るようにしたい。動作未確認
